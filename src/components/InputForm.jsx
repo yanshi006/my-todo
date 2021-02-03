@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const InputForm = ({ addTodos }) => {
+const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
 
   const [input, setInput] = useState('');
 
@@ -10,7 +10,9 @@ const InputForm = ({ addTodos }) => {
     if (input.trim() === '') {
       alert('今日の目標を決めよう！')
     } else {
-      addTodos(input);
+      // addAmTodos(input);
+      // addPmTodos(input);
+      // addEvTodos(input);
     }
     setInput('');
   }
@@ -18,9 +20,9 @@ const InputForm = ({ addTodos }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
-      <button type='submit'>午前中</button>
-      <button type='submit'>午後中</button>
-      <button type='submit'>夜中</button>
+      <button type='submit' onClick={() => addAmTodos(input)}>午前中</button>
+      <button type='submit' onClick={() => addPmTodos(input)}>午後中</button>
+      <button type='submit' onClick={() => addEvTodos(input)}>夜中</button>
     </form>
   )
 }
