@@ -3,6 +3,20 @@ import { InputForm, Today, TodoList, FinishTodoList } from "./components/index";
 import { AppProvider } from "./AppContext";
 import styled from "styled-components";
 import shortid from "shortid";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#aaaaaa'
+    }
+  },
+  status: {
+    am: '#03dffc',
+    pm: '#03fc35',
+    ev: '#c603fc'
+  }
+});
 
 const App = () => {
 
@@ -42,22 +56,31 @@ const App = () => {
 
   return (
     <>
-      <AppProvider amTodos={amTodos} setAmTodos={setAmTodos} pmTodos={pmTodos} setPmTodos={setPmTodos} evTodos={evTodos} setEvTodos={setEvTodos} amFinishTodos={amFinishTodos} setAmFinishTodos={setAmFinishTodos} pmFinishTodos={pmFinishTodos} setPmFinishTodos={setPmFinishTodos} evFinishTodos={evFinishTodos} setEvFinishTodos={setEvFinishTodos} >
-        <Container>
-          <h1>TodoApp</h1>
-          <InputForm addAmTodos={addAmTodos} addPmTodos={addPmTodos} addEvTodos={addEvTodos} />
-          <Today />
-        </Container>
-        <ListContainer>
-          <TodoList amTodos={amTodos} pmTodos={pmTodos} evTodos={evTodos} />
-          <FinishTodoList amFinishTodos={amFinishTodos} pmFinishTodos={pmFinishTodos} evFinishTodos={evFinishTodos} />
-        </ListContainer>
-      </AppProvider>
+      <ThemeProvider theme={theme}>
+        <AppProvider amTodos={amTodos} setAmTodos={setAmTodos} pmTodos={pmTodos} setPmTodos={setPmTodos} evTodos={evTodos} setEvTodos={setEvTodos} amFinishTodos={amFinishTodos} setAmFinishTodos={setAmFinishTodos} pmFinishTodos={pmFinishTodos} setPmFinishTodos={setPmFinishTodos} evFinishTodos={evFinishTodos} setEvFinishTodos={setEvFinishTodos} >
+          <Container>
+            <Title>TodoApp</Title>
+            <InputForm addAmTodos={addAmTodos} addPmTodos={addPmTodos} addEvTodos={addEvTodos} />
+            <Today />
+          </Container>
+          <ListContainer>
+            <TodoList amTodos={amTodos} pmTodos={pmTodos} evTodos={evTodos} />
+            <FinishTodoList amFinishTodos={amFinishTodos} pmFinishTodos={pmFinishTodos} evFinishTodos={evFinishTodos} />
+          </ListContainer>
+        </AppProvider>
+      </ThemeProvider>
     </>
   )
 }
 
 export default App;
+
+const Title = styled.h1`
+  font-family: serif;
+  font-size: 40px;
+  color: #aaa;
+  letter-spacing: 1px;
+`
 
 const Container = styled.div`
   display: flex;

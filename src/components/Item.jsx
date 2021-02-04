@@ -14,8 +14,8 @@ const Item = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          firstValue='削除'
-          secondValue='完了'
+          // firstValue='削除'
+          secondValue='finish'
           firstOnClick={() => deleteAmTodos(id)}
           secondOnClick={() => addAmFinishTodos(id)}
           thirdValue={text}
@@ -27,8 +27,8 @@ const Item = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          firstValue='削除'
-          secondValue='完了'
+          // firstValue='削除'
+          secondValue='finish'
           firstOnClick={() => deletePmTodos(id)}
           secondOnClick={() => addPmFinishTodos(id)}
           thirdValue={text}
@@ -40,8 +40,8 @@ const Item = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          firstValue='削除'
-          secondValue='完了'
+          // firstValue='削除'
+          secondValue='finish'
           firstOnClick={() => deleteEvTodos(id)}
           secondOnClick={() => addEvFinishTodos(id)}
           thirdValue={text}
