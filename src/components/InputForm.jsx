@@ -8,12 +8,9 @@ const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
     e.preventDefault();
 
     if (input.trim() === '') {
-      alert('今日の目標を決めよう！')
-    } else {
-      // addAmTodos(input);
-      // addPmTodos(input);
-      // addEvTodos(input);
-    }
+      return alert('今日の目標を決めよう！')
+    } //am,pm,evで処理を分けたい
+
     setInput('');
   }
 

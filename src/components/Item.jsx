@@ -1,13 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { ItemFiled } from "./index";
 
-const Item = ({ content, deleteTodos, id, addFinishTodos }) => {
-  return (
-    <li>
-      <span>{content}</span>
-      <input type="submit" value='削除' onClick={() => deleteTodos(id)} />
-      <input type="submit" value='完了' onClick={() => addFinishTodos(id)} />
-    </li>
-  )
+const Item = ({ content, id, deleteAmTodos, deletePmTodos, deleteEvTodos, addAmFinishTodos, addPmFinishTodos, addEvFinishTodos, type }) => {
+
+  const [text, setText] = useState('');
+
+  switch (type) {
+    case 'am':
+      return (
+        <ItemFiled
+        label={content}
+        type='submit'
+        firstValue='削除'
+        secondValue='完了'
+        firstOnClick={() => deleteAmTodos(id)}
+        secondOnClick={() => addAmFinishTodos(id)}
+        thirdValue={text}
+        onChange={(e) => setText(e.target.value)}
+        />
+      )
+    case 'pm':
+      return (
+        <ItemFiled
+        label={content}
+        type='submit'
+        firstValue='削除'
+        secondValue='完了'
+        firstOnClick={() => deletePmTodos(id)}
+        secondOnClick={() => addPmFinishTodos(id)}
+        thirdValue={text}
+        onChange={(e) => setText(e.target.value)}
+        />
+      )
+    case 'ev':
+      return (
+        <ItemFiled
+        label={content}
+        type='submit'
+        firstValue='削除'
+        secondValue='完了'
+        firstOnClick={() => deleteEvTodos(id)}
+        secondOnClick={() => addEvFinishTodos(id)}
+        thirdValue={text}
+        onChange={(e) => setText(e.target.value)}
+        />
+      )
+    default:
+      return type
+  }
 }
 
 export default Item;

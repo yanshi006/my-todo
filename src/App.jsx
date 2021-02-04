@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { InputForm, Today, TodoList, FinishTodoList } from "./components/index";
+import { AppProvider } from "./AppContext";
 import styled from "styled-components";
 import shortid from "shortid";
 
@@ -13,15 +14,6 @@ const App = () => {
   const [amFinishTodos, setAmFinishTodos] = useState([]);
   const [pmFinishTodos, setPmFinishTodos] = useState([]);
   const [evFinishTodos, setEvFinishTodos] = useState([]);
-
-  // const addTodos = useCallback(content => {
-  //   setTodos([
-  //     ...todos, {
-  //       content: content,
-  //       id: shortid.generate()
-  //     }
-  //   ])
-  // }, [setTodos, todos])
 
   //ok
   const addAmTodos = useCallback(content => {
@@ -53,33 +45,20 @@ const App = () => {
     ])
   }, [setEvTodos, evTodos])
 
-  // const addFinishTodos = (id) => {
-  //   // setTodos(
-  //   //   todos.filter(todo => todo.id !== id)
-  //   // )
-  //   // deleteTodos(id);
-  //   const compTodo = todos.find(todo => todo.id === id);
-  //   setFinishTodos([
-  //     ...finishTodos, compTodo
-  //   ])
-  // }
+  //////////////////////////////////////////////////
   //ok
   const addAmFinishTodos = (id) => {
-    // setTodos(
-    //   todos.filter(todo => todo.id !== id)
-    // )
-    // deleteTodos(id);
+    deleteAmTodos(id);
     const compAmTodo = amTodos.find(amTodo => amTodo.id === id);
-    setAmFinishTodos([
-      ...amFinishTodos, compAmTodo
-    ])
+    //どっちの書き方のが良いのか
+    const amArrray = amFinishTodos;
+    amArrray.push(compAmTodo);
+    setAmFinishTodos(amArrray);
   }
   //ok
   const addPmFinishTodos = (id) => {
-    // setTodos(
-    //   todos.filter(todo => todo.id !== id)
-    // )
-    // deleteTodos(id);
+    deletePmTodos(id);
+    //どっちの書き方のが良いのか
     const compPmTodo = pmTodos.find(pmTodo => pmTodo.id === id);
     setPmFinishTodos([
       ...pmFinishTodos, compPmTodo
@@ -87,27 +66,18 @@ const App = () => {
   }
   //ok
   const addEvFinishTodos = (id) => {
-    // setTodos(
-    //   todos.filter(todo => todo.id !== id)
-    // )
-    // deleteTodos(id);
+    deleteEvTodos(id);
     const compEvTodo = evTodos.find(evTodo => evTodo.id === id);
     setEvFinishTodos([
       ...evFinishTodos, compEvTodo
     ])
   }
+  /////////////////////////////////////////////////////
 
-  //戻すボタンが押された時
-  // const returnTodo = (id) => {
-  //   finishDeleteTodos(id);
-  //   const resTodo = finishTodos.find(finishtodo => finishtodo.id === id);
-  //   setTodos([
-  //     ...todos, resTodo
-  //   ])
-  // }
+  /////////////////////////////////////////////////////
   //ok
   const returnAmTodo = (id) => {
-    amFinishDeleteTodos(id);
+    finishDeleteAmTodos(id);
     const resAmTodo = amFinishTodos.find(amFinishtodo => amFinishtodo.id === id);
     setAmTodos([
       ...amTodos, resAmTodo
@@ -115,7 +85,7 @@ const App = () => {
   }
 
   const returnPmTodo = (id) => {
-    pmFinishDeleteTodos(id);
+    finishDeletePmTodos(id);
     const resPmTodo = pmFinishTodos.find(pmFinishtodo => pmFinishtodo.id === id);
     setPmTodos([
       ...pmTodos, resPmTodo
@@ -123,19 +93,15 @@ const App = () => {
   }
 
   const returnEvTodo = (id) => {
-    evFinishDeleteTodos(id);
+    finishDeleteEvTodos(id);
     const resEvTodo = evFinishTodos.find(evFinishtodo => evFinishtodo.id === id);
     setEvTodos([
       ...evTodos, resEvTodo
     ])
   }
+  /////////////////////////////////////////////////////
 
-
-  // const deleteTodos = useCallback(id => {
-  //   setTodos(
-  //     todos.filter(todo => todo.id !== id)
-  //   )
-  // }, [setTodos, todos])
+  /////////////////////////////////////////////////////
   //ok
   const deleteAmTodos = useCallback(id => {
     setAmTodos(
@@ -154,46 +120,45 @@ const App = () => {
       evTodos.filter(evTodo => evTodo.id !== id)
     )
   }, [setEvTodos, evTodos])
+  ///////////////////////////////////////////////////
 
-
-  // const finishDeleteTodos = useCallback(id => {
-  //   setFinishTodos(
-  //     finishTodos.filter(finishTodo => finishTodo.id !== id)
-  //   )
-  // }, [setFinishTodos, finishTodos])
+  /////////////////////////////////////////////////////
   //ok
-  const amFinishDeleteTodos = useCallback(id => {
+  const finishDeleteAmTodos = useCallback(id => {
     setAmFinishTodos(
       amFinishTodos.filter(amFinishTodo => amFinishTodo.id !== id)
     )
   }, [setAmFinishTodos, amFinishTodos])
 
   //ok
-  const pmFinishDeleteTodos = useCallback(id => {
+  const finishDeletePmTodos = useCallback(id => {
     setPmFinishTodos(
       pmFinishTodos.filter(pmFinishTodo => pmFinishTodo.id !== id)
     )
   }, [setPmFinishTodos, pmFinishTodos])
 
   //ok
-  const evFinishDeleteTodos = useCallback(id => {
+  const finishDeleteEvTodos = useCallback(id => {
     setEvFinishTodos(
       evFinishTodos.filter(evFinishTodo => evFinishTodo.id !== id)
     )
   }, [setEvFinishTodos, evFinishTodos])
-
+  ////////////////////////////////////////////////////
 
   return (
     <>
-      <Container>
-        <h1>TodoApp</h1>
-        <InputForm addAmTodos={addAmTodos} addPmTodos={addPmTodos} addEvTodos={addEvTodos} />
-        <Today />
-      </Container>
-      <ListContainer>
-        <TodoList amTodos={amTodos} pmTodos={pmTodos} evTodos={evTodos} deleteAmTodos={deleteAmTodos} deletePmTodos={deletePmTodos} deleteEvTodos={deleteEvTodos} addAmFinishTodos={addAmFinishTodos} addPmFinishTodos={addPmFinishTodos} addEvFinishTodos={addEvFinishTodos} />
-        <FinishTodoList amFinishTodos={amFinishTodos} pmFinishTodos={pmFinishTodos} evFinishTodos={evFinishTodos} returnAmTodo={returnAmTodo} returnPmTodo={returnPmTodo} returnEvTodo={returnEvTodo} amFinishDeleteTodos={amFinishDeleteTodos} pmFinishDeleteTodos={pmFinishDeleteTodos} evFinishDeleteTodos={evFinishDeleteTodos} />
-      </ListContainer>
+      <AppProvider>
+        <Container>
+          <h1>TodoApp</h1>
+          <InputForm addAmTodos={addAmTodos} addPmTodos={addPmTodos} addEvTodos={addEvTodos} />
+          <Today />
+        </Container>
+        <ListContainer>
+          <TodoList amTodos={amTodos} pmTodos={pmTodos} evTodos={evTodos} deleteAmTodos={deleteAmTodos} deletePmTodos={deletePmTodos} deleteEvTodos={deleteEvTodos} addAmFinishTodos={addAmFinishTodos} addPmFinishTodos={addPmFinishTodos} addEvFinishTodos={addEvFinishTodos} />
+
+          <FinishTodoList amFinishTodos={amFinishTodos} pmFinishTodos={pmFinishTodos} evFinishTodos={evFinishTodos} returnAmTodo={returnAmTodo} returnPmTodo={returnPmTodo} returnEvTodo={returnEvTodo} finishDeleteAmTodos={finishDeleteAmTodos} finishDeletePmTodos={finishDeletePmTodos} finishDeleteEvTodos={finishDeleteEvTodos} />
+        </ListContainer>
+      </AppProvider>
     </>
   )
 }

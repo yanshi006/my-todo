@@ -3,7 +3,7 @@ import { Item } from "./index";
 import styled from "styled-components";
 
 
-const TodoList = ({ todos, deleteTodos, addFinishTodos }) => {
+const TodoList = ({ amTodos, pmTodos, evTodos, deleteAmTodos, deletePmTodos, deleteEvTodos, addAmFinishTodos, addPmFinishTodos, addEvFinishTodos }) => {
 
   return (
     <>
@@ -13,7 +13,7 @@ const TodoList = ({ todos, deleteTodos, addFinishTodos }) => {
           <h2>午前中</h2>
           <ul>
             {
-              todos.map(todo => <Item key={todo.id} content={todo.content} id={todo.id} deleteTodos={deleteTodos} addFinishTodos={addFinishTodos} />)
+              amTodos.map(amTodo => <Item key={amTodo.id} content={amTodo.content} id={amTodo.id} deleteAmTodos={deleteAmTodos} addAmFinishTodos={addAmFinishTodos} type='am' />)
             }
           </ul>
         </div>
@@ -21,7 +21,7 @@ const TodoList = ({ todos, deleteTodos, addFinishTodos }) => {
           <h2>午後中</h2>
           <ul>
             {
-              todos.map(todo => <Item key={todo.id} content={todo.content} id={todo.id} deleteTodos={deleteTodos} addFinishTodos={addFinishTodos} />)
+              pmTodos.map(pmTodo => <Item key={pmTodo.id} content={pmTodo.content} id={pmTodo.id} deletePmTodos={deletePmTodos} addPmFinishTodos={addPmFinishTodos} type='pm' />)
             }
           </ul>
         </div>
@@ -29,7 +29,7 @@ const TodoList = ({ todos, deleteTodos, addFinishTodos }) => {
           <h2>夜中</h2>
           <ul>
             {
-              todos.map(todo => <Item key={todo.id} content={todo.content} id={todo.id} deleteTodos={deleteTodos} addFinishTodos={addFinishTodos} />)
+              evTodos.map(evTodo => <Item key={evTodo.id} content={evTodo.content} id={evTodo.id} deleteEvTodos={deleteEvTodos} addEvFinishTodos={addEvFinishTodos} type='ev' />)
             }
           </ul>
         </div>
