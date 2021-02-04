@@ -2,124 +2,130 @@ import React, { createContext, useCallback } from "react";
 
 const AppContext = createContext();
 
-const AppProvider = ({ children }) => {
-  
+const AppProvider = ({ children, amTodos, setAmTodos, pmTodos, setPmTodos, evTodos, setEvTodos, amFinishTodos, setAmFinishTodos, pmFinishTodos, setPmFinishTodos, evFinishTodos, setEvFinishTodos }) => {
   //TodoListの削除ボタンが押された時の関数
   //午前
   const deleteAmTodos = useCallback(id => {
     setAmTodos(
       amTodos.filter(amTodo => amTodo.id !== id)
     )
-  }, [setAmTodos, amTodos])
+  }, [setAmTodos, amTodos]);
+
   //午後
   const deletePmTodos = useCallback(id => {
     setPmTodos(
       pmTodos.filter(pmTodo => pmTodo.id !== id)
     )
-  }, [setPmTodos, pmTodos])
+  }, [setPmTodos, pmTodos]);
+
   //夜
   const deleteEvTodos = useCallback(id => {
     setEvTodos(
       evTodos.filter(evTodo => evTodo.id !== id)
     )
-  }, [setEvTodos, evTodos])
-  
+  }, [setEvTodos, evTodos]);
+
   //FinishTodoListの削除ボタンが押された時の関数
   //午前
   const finishDeleteAmTodos = useCallback(id => {
     setAmFinishTodos(
       amFinishTodos.filter(amFinishTodo => amFinishTodo.id !== id)
     )
-  }, [setAmFinishTodos, amFinishTodos])
+  }, [setAmFinishTodos, amFinishTodos]);
 
   //午後
   const finishDeletePmTodos = useCallback(id => {
     setPmFinishTodos(
       pmFinishTodos.filter(pmFinishTodo => pmFinishTodo.id !== id)
     )
-  }, [setPmFinishTodos, pmFinishTodos])
+  }, [setPmFinishTodos, pmFinishTodos]);
 
   //夜
   const finishDeleteEvTodos = useCallback(id => {
     setEvFinishTodos(
       evFinishTodos.filter(evFinishTodo => evFinishTodo.id !== id)
     )
-  }, [setEvFinishTodos, evFinishTodos])
+  }, [setEvFinishTodos, evFinishTodos]);
 
   //完了ボタンが押された時の関数
   //午前
-  const addAmFinishTodos = (id) => {
+  const addAmFinishTodos = useCallback(id => {
     deleteAmTodos(id);
     const compAmTodo = amTodos.find(amTodo => amTodo.id === id);
     //どっちの書き方のが良いのか
     const amArrray = amFinishTodos;
     amArrray.push(compAmTodo);
     setAmFinishTodos(amArrray);
-  }
+  }, [deleteAmTodos, amFinishTodos, amTodos, setAmFinishTodos]);
+
   //午後
-  const addPmFinishTodos = (id) => {
+  const addPmFinishTodos = useCallback(id => {
     deletePmTodos(id);
     //どっちの書き方のが良いのか
     const compPmTodo = pmTodos.find(pmTodo => pmTodo.id === id);
     setPmFinishTodos([
       ...pmFinishTodos, compPmTodo
     ])
-  }
+  }, [deletePmTodos, pmFinishTodos, pmTodos, setPmFinishTodos]);
+
   //夜
-  const addEvFinishTodos = (id) => {
+  const addEvFinishTodos = useCallback(id => {
     deleteEvTodos(id);
     const compEvTodo = evTodos.find(evTodo => evTodo.id === id);
     setEvFinishTodos([
       ...evFinishTodos, compEvTodo
     ])
-  }
+  }, [deleteEvTodos, evFinishTodos, evTodos, setEvFinishTodos]);
 
   //戻すボタンが押された時の関数
   //午前
-  const returnAmTodo = (id) => {
+  const returnAmTodo = useCallback(id => {
     finishDeleteAmTodos(id);
     const resAmTodo = amFinishTodos.find(amFinishtodo => amFinishtodo.id === id);
     setAmTodos([
       ...amTodos, resAmTodo
     ])
-  }
+  }, [finishDeleteAmTodos, amFinishTodos, amTodos, setAmTodos]);
+
   //午後
-  const returnPmTodo = (id) => {
+  const returnPmTodo = useCallback(id => {
     finishDeletePmTodos(id);
     const resPmTodo = pmFinishTodos.find(pmFinishtodo => pmFinishtodo.id === id);
     setPmTodos([
       ...pmTodos, resPmTodo
     ])
-  }
+  }, [finishDeletePmTodos, pmFinishTodos, pmTodos, setPmTodos]);
+
   //夜
-  const returnEvTodo = (id) => {
+  const returnEvTodo = useCallback(id => {
     finishDeleteEvTodos(id);
     const resEvTodo = evFinishTodos.find(evFinishtodo => evFinishtodo.id === id);
     setEvTodos([
       ...evTodos, resEvTodo
     ])
-  }
+  }, [finishDeleteEvTodos,evFinishTodos, evTodos, setEvTodos]);
 
   return (
-  <AppContext.Provider value={{deleteAmTodos,
-  deletePmTodos,
-  deleteEvTodos,
-  finishDeleteAmTodos,
-  finishDeletePmTodos,
-  finishDeleteEvTodos,
-  addAmFinishTodos,
-  addPmFinishTodos,
-  addEvFinishTodos,
-  returnAmTodo,
-  returnPmTodo,
-  returnEvTodo
-  }}>
-    {children}
-  </AppContext.Provider>
+    <AppContext.Provider value={{
+      deleteAmTodos,
+      deletePmTodos,
+      deleteEvTodos,
+      finishDeleteAmTodos,
+      finishDeletePmTodos,
+      finishDeleteEvTodos,
+      addAmFinishTodos,
+      addPmFinishTodos,
+      addEvFinishTodos,
+      returnAmTodo,
+      returnPmTodo,
+      returnEvTodo
+    }}>
+      {children}
+    </AppContext.Provider>
   )
-}
+};
 
 export {
   AppContext,
   AppProvider
-}
+};
