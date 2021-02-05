@@ -26,7 +26,7 @@ const FinishItem = ({ content, id, type }) => {
           label={content}
           type='submit'
           color={classes.amButton}
-          secondValue='Imperfect'
+          text='Imperfect'
           firstOnClick={() => finishDeleteAmTodos(id)}
           secondOnClick={() => returnAmTodo(id)}
         />
@@ -37,7 +37,7 @@ const FinishItem = ({ content, id, type }) => {
           label={content}
           type='submit'
           color={classes.amButton}
-          secondValue='Imperfect'
+          text='Imperfect'
           firstOnClick={() => finishDeletePmTodos(id)}
           secondOnClick={() => returnPmTodo(id)}
         />
@@ -48,7 +48,7 @@ const FinishItem = ({ content, id, type }) => {
           label={content}
           type='submit'
           color={classes.amButton}
-          secondValue='Imperfect'
+          text='Imperfect'
           firstOnClick={() => finishDeleteEvTodos(id)}
           secondOnClick={() => returnEvTodo(id)}
         />

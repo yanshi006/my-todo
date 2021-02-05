@@ -3,6 +3,10 @@ import styled from "styled-components";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { AppMessage } from "../components/index";
+import { RegisterTitle } from "../components/index";
+import firebase from "../config/Firebase";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles({
   loginButton: {
@@ -14,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Login = () => {
+const Login = ({ history }) => {
 
   const classes = useStyles();
 
@@ -23,37 +27,36 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        history.push('/app');
+      })
+      .catch(error => {
+        if (error.code === 'auth/wrong-password') {
+          alert('パスワードが間違っています。');
+        } else if (error.code === 'auth/too-many-requests') {
+          alert('このアカウントへのアクセスは一時的に無効にされています。パスワードを設定するか、後でもう一度試してください。');
+        } else if (error.code === 'auth/user-not-found') {
+          alert('メールアドレスが間違っています。');
+        }
+      })
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <LoginAppTitle>Let's get started</LoginAppTitle>
-      {/* ////////////ここの部分コンポーネントにまとめるloginとsignup */}
+      <AppMessage message="Let's get started" />
       <LoginContainer>
-        <LoginTitle>Login</LoginTitle>
+        <RegisterTitle title='Login' />
         <TextField value={email} type='email' name='email' placeholder='please your e-mail' label="E-mail" onChange={(e) => setEmail(e.target.value)} />
         <TextField value={password} type='password' name='password' placeholder='please your password' label="Password" onChange={(e) => setPassword(e.target.value)} />
         <Button type='submit' variant="contained" className={classes.loginButton}>Login</Button>
       </LoginContainer>
-      {/* //////////// */}
     </form>
   )
 }
 
-export default Login;
-
-const LoginAppTitle = styled.h1`
-  font-size: 30px;
-  font-family: serif;
-  color: #aaa;
-  text-align: center;
-`
-
-const LoginTitle = styled.h1`
-  font-size: 30px;
-  color: #333;
-  font-family: serif;
-`
+export default withRouter(Login);
 
 const LoginContainer = styled.div`
   display: flex;

@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ItemFiled = ({ label, color, type, secondValue, thirdValue, firstOnClick, secondOnClick, onChange }) => {
+const ItemFiled = ({ label, color, type, text, value, firstOnClick, secondOnClick, onChange }) => {
 
   const classes = useStyles();
 
@@ -37,12 +37,10 @@ const ItemFiled = ({ label, color, type, secondValue, thirdValue, firstOnClick, 
       <IconButton className={classes.delButton} type={type} aria-label="delete" onClick={firstOnClick}>
         <DeleteIcon />
       </IconButton>
-      {/* <SpaceInput type={type} value={firstValue} onClick={firstOnClick} /> */}
-      {/* <SpaceInput type={type} value={secondValue} onClick={secondOnClick} /> */}
       <Button className={color} style={buttonTextStyle} type={type} size='small' onClick={secondOnClick} variant="contained">
-        {secondValue}
+        {text}
       </Button>
-      <Textarea value={thirdValue} cols="20" rows="4" placeholder='メモ' onChange={onChange} />
+      <Textarea value={value} cols="20" rows="4" placeholder='メモ' onChange={onChange} />
     </List>
   )
 }

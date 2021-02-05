@@ -28,10 +28,10 @@ const Item = ({ content, id, type }) => {
           label={content}
           type='submit'
           color={classes.pmButton}
-          secondValue='Perfect'
+          text='Perfect'
           firstOnClick={() => deleteAmTodos(id)}
           secondOnClick={() => addAmFinishTodos(id)}
-          thirdValue={text}
+          value={text}
           onChange={(e) => setText(e.target.value)}
         />
       )
@@ -41,10 +41,10 @@ const Item = ({ content, id, type }) => {
           label={content}
           type='submit'
           color={classes.pmButton}
-          secondValue='Perfect'
+          text='Perfect'
           firstOnClick={() => deletePmTodos(id)}
           secondOnClick={() => addPmFinishTodos(id)}
-          thirdValue={text}
+          value={text}
           onChange={(e) => setText(e.target.value)}
         />
       )
@@ -54,10 +54,10 @@ const Item = ({ content, id, type }) => {
           label={content}
           type='submit'
           color={classes.pmButton}
-          secondValue='Perfect'
+          text='Perfect'
           firstOnClick={() => deleteEvTodos(id)}
           secondOnClick={() => addEvFinishTodos(id)}
-          thirdValue={text}
+          value={text}
           onChange={(e) => setText(e.target.value)}
         />
       )

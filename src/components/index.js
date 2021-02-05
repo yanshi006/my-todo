@@ -8,3 +8,5 @@ export {default as FinishItem} from "./FinishItem";
 export {default as ItemFiled} from "./ItemFiled";
 export {default as ListTitle} from "./ListTitle";
 export {default as ListSubTitle} from "./ListSubTitle";
+export {default as AppMessage} from "./AppMessage";
+export {default as RegisterTitle} from "./RegisterTitle";
