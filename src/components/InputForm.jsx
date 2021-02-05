@@ -1,23 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import { AppContext } from "../AppContext";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
-
-const useStyles = makeStyles((theme) => ({
-  amButton: {
-    color: theme.status.am
-  },
-  pmButton: {
-    color: theme.status.pm
-  },
-  evButton: {
-    color: theme.status.ev
-  }
-}));
 
 const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
 
+  const { useStyles } = useContext(AppContext);
   const classes = useStyles();
 
   const [input, setInput] = useState('');
@@ -36,15 +25,20 @@ const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
     setInput('');
     // console.log(e.target.value);
   }
+
+  const textStyle = {
+    textTransform: 'none',
+    fontSize: '16px'
+  }
   
   return (
     <Form onSubmit={handleSubmit}>
       {/* setInputで入力された値を取り出せていない */}
       <TextField id='addFiled' value={input} color='primary' label="Add" onChange={(e) => setInput(e.target.value)} />
       <ButtonContainer>
-        <Button variant="outlined" className={classes.amButton} onClick={() => addAmTodos(input)}>morning</Button>
-        <Button variant="outlined" className={classes.pmButton} onClick={() => addPmTodos(input)}>afternoon</Button>
-        <Button variant="outlined" className={classes.evButton} onClick={() => addEvTodos(input)}>night</Button>
+        <Button variant="outlined" style={textStyle} className={classes.amButton} onClick={() => addAmTodos(input)}>a.m.</Button>
+        <Button variant="outlined" style={textStyle} className={classes.pmButton} onClick={() => addPmTodos(input)}>p.m.</Button>
+        <Button variant="outlined" style={textStyle} className={classes.evButton} onClick={() => addEvTodos(input)}>night</Button>
       </ButtonContainer>
     </Form>
   )
@@ -59,8 +53,7 @@ const Form = styled.form`
 
 const ButtonContainer = styled.div`
   display: flex;
-  height: 130px;
-  flex-direction: column;
   justify-content: space-between;
-  margin-left: 10px;
+  width: 210px;
+  margin-left: 10px
 `

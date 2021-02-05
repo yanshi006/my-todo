@@ -1,8 +1,21 @@
 import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { ItemFiled } from "./index";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  amButton: {
+    backgroundColor: '#9CA592' ,
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#ADBC9D'
+    }
+  },
+});
 
 const FinishItem = ({ content, id, type }) => {
+
+  const classes = useStyles();
 
   const { returnAmTodo, returnPmTodo, returnEvTodo, finishDeleteAmTodos, finishDeletePmTodos, finishDeleteEvTodos } = useContext(AppContext);
 
@@ -12,8 +25,8 @@ const FinishItem = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          // firstValue='削除'
-          secondValue='return'
+          color={classes.amButton}
+          secondValue='Imperfect'
           firstOnClick={() => finishDeleteAmTodos(id)}
           secondOnClick={() => returnAmTodo(id)}
         />
@@ -23,8 +36,8 @@ const FinishItem = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          // firstValue='削除'
-          secondValue='return'
+          color={classes.amButton}
+          secondValue='Imperfect'
           firstOnClick={() => finishDeletePmTodos(id)}
           secondOnClick={() => returnPmTodo(id)}
         />
@@ -34,8 +47,8 @@ const FinishItem = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          // firstValue='削除'
-          secondValue='return'
+          color={classes.amButton}
+          secondValue='Imperfect'
           firstOnClick={() => finishDeleteEvTodos(id)}
           secondOnClick={() => returnEvTodo(id)}
         />

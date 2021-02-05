@@ -1,8 +1,21 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../AppContext";
 import { ItemFiled } from "./index";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  pmButton: {
+    backgroundColor: '#88FF01',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#A0FF33'
+    }
+  },
+});
 
 const Item = ({ content, id, type }) => {
+
+  const classes = useStyles();
 
   const { deleteAmTodos, deletePmTodos, deleteEvTodos, addAmFinishTodos, addPmFinishTodos, addEvFinishTodos } = useContext(AppContext);
 
@@ -14,8 +27,8 @@ const Item = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          // firstValue='削除'
-          secondValue='finish'
+          color={classes.pmButton}
+          secondValue='Perfect'
           firstOnClick={() => deleteAmTodos(id)}
           secondOnClick={() => addAmFinishTodos(id)}
           thirdValue={text}
@@ -27,8 +40,8 @@ const Item = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          // firstValue='削除'
-          secondValue='finish'
+          color={classes.pmButton}
+          secondValue='Perfect'
           firstOnClick={() => deletePmTodos(id)}
           secondOnClick={() => addPmFinishTodos(id)}
           thirdValue={text}
@@ -40,8 +53,8 @@ const Item = ({ content, id, type }) => {
         <ItemFiled
           label={content}
           type='submit'
-          // firstValue='削除'
-          secondValue='finish'
+          color={classes.pmButton}
+          secondValue='Perfect'
           firstOnClick={() => deleteEvTodos(id)}
           secondOnClick={() => addEvFinishTodos(id)}
           thirdValue={text}

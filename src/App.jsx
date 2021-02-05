@@ -8,14 +8,17 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#aaaaaa'
+      main: '#333'
     }
   },
   status: {
     am: '#03dffc',
     pm: '#03fc35',
     ev: '#c603fc'
-  }
+  },
+  typography: {
+    fontFamily: 'serif',
+  },
 });
 
 const App = () => {
@@ -78,7 +81,7 @@ export default App;
 const Title = styled.h1`
   font-family: serif;
   font-size: 40px;
-  color: #aaa;
+  color: #333;
   letter-spacing: 1px;
 `
 

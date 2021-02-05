@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ItemFiled = ({ label, type, secondValue, thirdValue, firstOnClick, secondOnClick, onChange }) => {
+const ItemFiled = ({ label, color, type, secondValue, thirdValue, firstOnClick, secondOnClick, onChange }) => {
 
   const classes = useStyles();
 
@@ -34,7 +34,7 @@ const ItemFiled = ({ label, type, secondValue, thirdValue, firstOnClick, secondO
       </IconButton>
       {/* <SpaceInput type={type} value={firstValue} onClick={firstOnClick} /> */}
       {/* <SpaceInput type={type} value={secondValue} onClick={secondOnClick} /> */}
-      <Button type={type} size='small' onClick={secondOnClick} variant="contained" className={classes.button}>
+      <Button className={color} type={type} size='small' onClick={secondOnClick} variant="contained">
         {secondValue}
       </Button>
       <textarea value={thirdValue} cols="20" rows="4" placeholder='メモ' onChange={onChange} />

@@ -1,4 +1,5 @@
 import React, { createContext, useCallback } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const AppContext = createContext();
 
@@ -103,7 +104,20 @@ const AppProvider = ({ children, amTodos, setAmTodos, pmTodos, setPmTodos, evTod
     setEvTodos([
       ...evTodos, resEvTodo
     ])
-  }, [finishDeleteEvTodos,evFinishTodos, evTodos, setEvTodos]);
+  }, [finishDeleteEvTodos, evFinishTodos, evTodos, setEvTodos]);
+
+  //共通のmakeStyles
+  const useStyles = makeStyles((theme) => ({
+    amButton: {
+      color: theme.status.am,
+    },
+    pmButton: {
+      color: theme.status.pm
+    },
+    evButton: {
+      color: theme.status.ev
+    }
+  }));
 
   return (
     <AppContext.Provider value={{
@@ -118,7 +132,8 @@ const AppProvider = ({ children, amTodos, setAmTodos, pmTodos, setPmTodos, evTod
       addEvFinishTodos,
       returnAmTodo,
       returnPmTodo,
-      returnEvTodo
+      returnEvTodo,
+      useStyles
     }}>
       {children}
     </AppContext.Provider>
