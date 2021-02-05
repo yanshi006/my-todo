@@ -13,7 +13,7 @@ const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    //firebaseで値を管理する
     if (input.trim() === '') {
        alert('今日の目標を決めよう！')
     } else {
@@ -26,7 +26,7 @@ const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
     // console.log(e.target.value);
   }
 
-  const textStyle = {
+  const buttonTextStyle = {
     textTransform: 'none',
     fontSize: '16px'
   }
@@ -36,9 +36,9 @@ const InputForm = ({ addAmTodos, addPmTodos, addEvTodos }) => {
       {/* setInputで入力された値を取り出せていない */}
       <TextField id='addFiled' value={input} color='primary' label="Add" onChange={(e) => setInput(e.target.value)} />
       <ButtonContainer>
-        <Button variant="outlined" style={textStyle} className={classes.amButton} onClick={() => addAmTodos(input)}>a.m.</Button>
-        <Button variant="outlined" style={textStyle} className={classes.pmButton} onClick={() => addPmTodos(input)}>p.m.</Button>
-        <Button variant="outlined" style={textStyle} className={classes.evButton} onClick={() => addEvTodos(input)}>night</Button>
+        <Button variant="outlined" style={buttonTextStyle} className={classes.amButton} onClick={() => addAmTodos(input)}>a.m.</Button>
+        <Button variant="outlined" style={buttonTextStyle} className={classes.pmButton} onClick={() => addPmTodos(input)}>p.m.</Button>
+        <Button variant="outlined" style={buttonTextStyle} className={classes.evButton} onClick={() => addEvTodos(input)}>night</Button>
       </ButtonContainer>
     </Form>
   )

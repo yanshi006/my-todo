@@ -17,7 +17,7 @@ const Today = () => {
   )
 }
 
-export default Today
+export default Today;
 
 const Day = styled.h1`
   font-size: 30px;

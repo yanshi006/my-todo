@@ -26,6 +26,11 @@ const ItemFiled = ({ label, color, type, secondValue, thirdValue, firstOnClick, 
 
   const classes = useStyles();
 
+  const buttonTextStyle = {
+    textTransform: 'none',
+    fontSize: '16px'
+  }
+
   return (
     <List>
       <span>{label}</span>
@@ -34,10 +39,10 @@ const ItemFiled = ({ label, color, type, secondValue, thirdValue, firstOnClick, 
       </IconButton>
       {/* <SpaceInput type={type} value={firstValue} onClick={firstOnClick} /> */}
       {/* <SpaceInput type={type} value={secondValue} onClick={secondOnClick} /> */}
-      <Button className={color} type={type} size='small' onClick={secondOnClick} variant="contained">
+      <Button className={color} style={buttonTextStyle} type={type} size='small' onClick={secondOnClick} variant="contained">
         {secondValue}
       </Button>
-      <textarea value={thirdValue} cols="20" rows="4" placeholder='メモ' onChange={onChange} />
+      <Textarea value={thirdValue} cols="20" rows="4" placeholder='メモ' onChange={onChange} />
     </List>
   )
 }
@@ -48,4 +53,7 @@ const List = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
+`
+const Textarea = styled.textarea`
+  margin-left: 10px;
 `
