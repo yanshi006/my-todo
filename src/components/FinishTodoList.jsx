@@ -1,11 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FinishItem, ListTitle, ListSubTitle } from "./index";
 import styled from "styled-components";
-import { AppContext } from "../AppContext";
+import { makeStyles } from "@material-ui/core/styles";
 
-const FinishTodoList = ({ amFinishTodos, pmFinishTodos, evFinishTodos }) => {
+const useStyles = makeStyles((theme) => ({
+  amButton: {
+    color: theme.status.am,
+  },
+  pmButton: {
+    color: theme.status.pm
+  },
+  evButton: {
+    color: theme.status.ev
+  }
+}));
 
-  const { useStyles } = useContext(AppContext);
+
+const FinishTodoList = ({ returnAmTodo, returnPmTodo, returnEvTodo, finishDeleteAmTodos, finishDeletePmTodos, finishDeleteEvTodos, amFinishTodos, pmFinishTodos, evFinishTodos }) => {
+
   const classes = useStyles();
 
   return (
@@ -14,19 +26,19 @@ const FinishTodoList = ({ amFinishTodos, pmFinishTodos, evFinishTodos }) => {
       <div>
         <ListSubTitle color={classes.amButton} label='a.m.' />
         <ul>
-          {amFinishTodos.map(amFinishTodo => <FinishItem key={amFinishTodo.id} content={amFinishTodo.content} id={amFinishTodo.id} type='finishAm' />)}
+          {amFinishTodos.map(amFinishTodo => <FinishItem key={amFinishTodo.id} content={amFinishTodo.content} id={amFinishTodo.id} type='finishAm' returnAmTodo={returnAmTodo} finishDeleteAmTodos={finishDeleteAmTodos} />)}
         </ul>
       </div>
       <div>
         <ListSubTitle color={classes.pmButton} label='p.m.' />
         <ul>
-          {pmFinishTodos.map(pmFinishTodo => <FinishItem key={pmFinishTodo.id} content={pmFinishTodo.content} id={pmFinishTodo.id} type='finishPm' />)}
+          {pmFinishTodos.map(pmFinishTodo => <FinishItem key={pmFinishTodo.id} content={pmFinishTodo.content} id={pmFinishTodo.id} type='finishPm' returnPmTodo={returnPmTodo} finishDeletePmTodos={finishDeletePmTodos} />)}
         </ul>
       </div>
       <div>
         <ListSubTitle color={classes.evButton} label='night' />
         <ul>
-          {evFinishTodos.map(finishTodo => <FinishItem key={finishTodo.id} content={finishTodo.content} id={finishTodo.id} type='finishEv' />)}
+          {evFinishTodos.map(finishTodo => <FinishItem key={finishTodo.id} content={finishTodo.content} id={finishTodo.id} type='finishEv' returnEvTodo={returnEvTodo} finishDeleteEvTodos={finishDeleteEvTodos} />)}
         </ul>
       </div>
     </ListBox>

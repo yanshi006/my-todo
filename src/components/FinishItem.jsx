@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { AppContext } from "../AppContext";
+import React from "react";
+// import { AppContext } from "../AppContext";
 import { ItemFiled } from "./index";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -13,11 +13,11 @@ const useStyles = makeStyles({
   },
 });
 
-const FinishItem = ({ content, id, type }) => {
+const FinishItem = ({ content, id, type, returnAmTodo, returnPmTodo, returnEvTodo, finishDeleteAmTodos, finishDeletePmTodos, finishDeleteEvTodos }) => {
 
   const classes = useStyles();
 
-  const { returnAmTodo, returnPmTodo, returnEvTodo, finishDeleteAmTodos, finishDeletePmTodos, finishDeleteEvTodos } = useContext(AppContext);
+  // const { returnAmTodo, returnPmTodo, returnEvTodo, finishDeleteAmTodos, finishDeletePmTodos, finishDeleteEvTodos } = useContext(AppContext);
 
   switch (type) {
     case `finishAm`:

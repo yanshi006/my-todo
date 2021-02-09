@@ -11,6 +11,5 @@ export default ListSubTitle;
 
 const SubTitleStyle = styled.h2`
   font-size: 25px;
-  color: #333;
   font-family: serif;
 `

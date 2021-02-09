@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppMessage } from "../components/index";
 import { RegisterTitle } from "../components/index";
 import firebase from "../config/Firebase";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   loginButton: {
@@ -15,6 +15,14 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#03fc5a'
     }
+  },
+  linkButton: {
+    backgroundColor: '#FC8A25',
+    color: '#fff',
+    borderRadius: '5px',
+    textDecoration: 'none',
+    padding: '10px',
+    fontSize: '14px'
   }
 })
 
@@ -29,8 +37,8 @@ const Login = ({ history }) => {
     e.preventDefault();
 
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        history.push('/app');
+      .then(() => {
+        history.push('/');
       })
       .catch(error => {
         if (error.code === 'auth/wrong-password') {
@@ -48,22 +56,23 @@ const Login = ({ history }) => {
       <AppMessage message="Let's get started" />
       <LoginContainer>
         <RegisterTitle title='Login' />
-        <TextField value={email} type='email' name='email' placeholder='please your e-mail' label="E-mail" onChange={(e) => setEmail(e.target.value)} />
-        <TextField value={password} type='password' name='password' placeholder='please your password' label="Password" onChange={(e) => setPassword(e.target.value)} />
+        <TextField value={email} type='email' required name='email' placeholder='please your e-mail' label="E-mail" onChange={(e) => setEmail(e.target.value)} />
+        <TextField value={password} type='password' required name='password' placeholder='please your password' label="Password" onChange={(e) => setPassword(e.target.value)} />
         <Button type='submit' variant="contained" className={classes.loginButton}>Login</Button>
+        <Link className={classes.linkButton} to='signup'>新規登録</Link>
       </LoginContainer>
     </form>
   )
 }
 
-export default withRouter(Login);
+export default Login;
 
 const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 300px;
+  height: 330px;
   background-color: #ddd;
   width: 60%;
   margin: 5% auto 0px;

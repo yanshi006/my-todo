@@ -4,17 +4,20 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { TotalApp, SignUp, Login } from "./page/index";
+import { TotalApp, SignUp, Login, TotalAppRoute } from "./page/index";
+import { AppProvider } from "./AppContext";
 
 const App = () => {
   return (
+  <AppProvider>
     <Router>
       <Switch>
-        <Route exact path='/app' component={TotalApp} />
+        <TotalAppRoute exact path='/' component={TotalApp} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={SignUp} />
       </Switch>
     </Router>
+  </AppProvider>
   )
 }
 

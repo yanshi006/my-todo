@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { AppContext } from "../AppContext";
+import React, { useState } from "react";
+// import { AppContext } from "../AppContext";
 import { ItemFiled } from "./index";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -13,11 +13,11 @@ const useStyles = makeStyles({
   },
 });
 
-const Item = ({ content, id, type }) => {
+const Item = ({ content, id, type, deleteAmTodos, deletePmTodos, deleteEvTodos, addAmFinishTodos, addPmFinishTodos, addEvFinishTodos }) => {
 
   const classes = useStyles();
 
-  const { deleteAmTodos, deletePmTodos, deleteEvTodos, addAmFinishTodos, addPmFinishTodos, addEvFinishTodos } = useContext(AppContext);
+  // const { deleteAmTodos, deletePmTodos, deleteEvTodos, addAmFinishTodos, addPmFinishTodos, addEvFinishTodos } = useContext(AppContext);
 
   const [text, setText] = useState('');
 
